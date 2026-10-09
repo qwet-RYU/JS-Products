@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--
+  Product Explorer — JS Weekly Challenge #4
+  File ini HANYA struktur HTML. Semua interaksi (fetch data, search, filter,
+  sorting, reset, counter, dan modal) akan ditulis sendiri di script.js.
+-->
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Explorer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- ================= HEADER ================= -->
+      <header class="header">
+        <p class="header-eyebrow">JS Weekly Challenge #4</p>
+        <h1 class="header-title">Product Explorer</h1>
+        <p class="header-subtitle">Explore products from DummyJSON API</p>
+      </header>
+
+      <!-- ================= KONTROL ================= -->
+      <!-- Semua kontrol di bawah ini adalah titik masuk dari script.js:
+           baca nilainya dengan .value dan dengarkan perubahannya dengan
+           event (input / change / click). -->
+      <section class="controls" aria-label="Filter dan pencarian produk">
+        <!-- Pencarian: id="searchInput" -->
+        <div class="control">
+          <label for="searchInput">Cari produk</label>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Cari berdasarkan nama..."
+          />
+        </div>
+
+        <!-- Filter kategori: id="categoryFilter" -->
+        <div class="control">
+          <label for="categoryFilter">Kategori</label>
+          <select id="categoryFilter">
+            <option value="all">Semua kategori</option>
+            <option value="beauty">Beauty</option>
+            <option value="groceries">Groceries</option>
+            <option value="furniture">Furniture</option>
+          </select>
+        </div>
+
+        <!-- Sorting: id="sortSelect" -->
+        <div class="control">
+          <label for="sortSelect">Urutkan</label>
+          <select id="sortSelect">
+            <option value="default">Default</option>
+            <option value="price-asc">Harga terendah</option>
+            <option value="price-desc">Harga tertinggi</option>
+            <option value="rating-desc">Rating tertinggi</option>
+            <option value="name-asc">Nama A-Z</option>
+          </select>
+        </div>
+
+        <!-- Reset: id="resetButton" -->
+        <div class="control control-reset">
+          <label for="resetButton" class="visually-hidden">Reset filter</label>
+          <button type="button" id="resetButton" class="reset-button">
+            Reset Filter
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= STATUS ================= -->
+      <!-- id="loadingState" : tampilkan saat data sedang diambil dari API -->
+      <div id="loadingState" class="status loading-state hidden">
+        <span class="spinner" aria-hidden="true"></span>
+        Memuat produk...
+      </div>
+
+      <!-- id="errorState" : tampilkan jika request API gagal -->
+      <div id="errorState" class="status error-state hidden" role="alert">
+        Gagal memuat produk. Periksa koneksi lalu coba lagi.
+      </div>
+
+      <!-- id="productCounter" : tulis teks jumlah produk yang tampil,
+           contoh: "5 dari 100 product ditampilkan." -->
+      <p id="productCounter" class="product-counter" aria-live="polite"></p>
+
+      <!-- ================= GRID PRODUK ================= -->
+      <!-- id="productGrid" : container untuk semua product card.
+           Hapus card contoh di bawah dari HTML, render card dari JavaScript. -->
+      <main id="productGrid" class="product-grid">
+        <!-- ============ CARD CONTOH (placeholder visual) ============
+             Card ini hanya contoh tampilan. Nanti akan DIHAPUS atau
+             DIGANTI oleh JavaScript saat data dari DummyJSON dirender.
+             Struktur card di script.js sebaiknya mengikuti pola ini. -->
+        <article class="product-card">
+          <img
+            class="product-image"
+            src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
+            alt="Essence Mascara Lash Princess"
+          />
+          <div class="product-body">
+            <span class="product-category">Beauty</span>
+            <h2 class="product-title">Essence Mascara Lash Princess</h2>
+            <div class="product-meta">
+              <span class="product-price">$9.99</span>
+              <span class="product-rating">★ 4.94</span>
+            </div>
+            <button type="button" class="detail-button">Lihat Detail</button>
+          </div>
+        </article>
+        <!-- ============ AKHIR CARD CONTOH ============ -->
+      </main>
+    </div>
+
+    <!-- ================= MODAL DETAIL ================= -->
+    <!-- id="productModal" : container modal (overlay gelap di belakang dialog).
+         Tersembunyi default lewat class "hidden" — script.js yang menambah /
+         menghapus class ini untuk membuka dan menutup modal. -->
+    <div id="productModal" class="modal-overlay hidden">
+      <div
+        class="modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <!-- id="closeModal" : tombol untuk menutup modal -->
+        <button type="button" id="closeModal" class="modal-close" aria-label="Tutup detail produk">
+          &times;
+        </button>
+
+        <!-- id="modalContent" : area isi detail produk
+             (thumbnail, kategori, judul, deskripsi, harga, rating, stock, brand).
+             Isi elemen ini dari script.js saat card diklik. -->
+        <div id="modalContent" class="modal-content">
+          <!-- id="modalTitle" dipakai sebagai label dialog -->
+          <h2 id="modalTitle" class="visually-hidden">Detail produk</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script kosong — semua logic ditulis sendiri di sini -->
+    <script src="script.js"></script>
+  </body>
+</html>
